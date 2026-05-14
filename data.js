@@ -42,7 +42,10 @@ const MODELS = [
   { id: "mixtral-8x22b",   name: "Mixtral 8x22B (MoE)",   family: "Mistral",   params: 141,   active: 39,    layers: 56,  kvPer1K: 112, moe: true },
 
   // ── Google Gemma ──────────────────────────────────────────
-  { id: "gemma-4-27b",     name: "Gemma 4 27B Instruct",  family: "Gemma",     params: 27.4,  active: 27.4,  layers: 62,  kvPer1K: 124 },
+  { id: "gemma-4-e2b",     name: "Gemma 4 E2B",           family: "Gemma",     params: 2.0,   active: 2.0,   layers: 18,  kvPer1K: 36  },
+  { id: "gemma-4-e4b",     name: "Gemma 4 E4B",           family: "Gemma",     params: 4.0,   active: 4.0,   layers: 28,  kvPer1K: 56  },
+  { id: "gemma-4-26b-a4b", name: "Gemma 4 26B A4B",       family: "Gemma",     params: 26.0,  active: 4.0,   layers: 42,  kvPer1K: 84,  moe: true },
+  { id: "gemma-4-31b",     name: "Gemma 4 31B",           family: "Gemma",     params: 31.0,  active: 31.0,  layers: 62,  kvPer1K: 124 },
   { id: "gemma-3-4b",      name: "Gemma 3 4B Instruct",   family: "Gemma",     params: 4.30,  active: 4.30,  layers: 34,  kvPer1K: 68  },
   { id: "gemma-3-12b",     name: "Gemma 3 12B Instruct",  family: "Gemma",     params: 12.2,  active: 12.2,  layers: 48,  kvPer1K: 96  },
   { id: "gemma-3-27b",     name: "Gemma 3 27B Instruct",  family: "Gemma",     params: 27.4,  active: 27.4,  layers: 62,  kvPer1K: 124 },
