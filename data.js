@@ -16,6 +16,8 @@
 
 const MODELS = [
   // ── Llama family ──────────────────────────────────────────
+  { id: "llama-4-scout",   name: "Llama 4 Scout (MoE)",   family: "Llama",     params: 109,   active: 17,    layers: 48,  kvPer1K: 96,  moe: true },
+  { id: "llama-4-maverick",name: "Llama 4 Maverick (MoE)",family: "Llama",     params: 400,   active: 17,    layers: 48,  kvPer1K: 96,  moe: true },
   { id: "llama-3.2-1b",    name: "Llama 3.2 1B",          family: "Llama",     params: 1.24,  active: 1.24,  layers: 16,  kvPer1K: 16  },
   { id: "llama-3.2-3b",    name: "Llama 3.2 3B",          family: "Llama",     params: 3.21,  active: 3.21,  layers: 28,  kvPer1K: 56  },
   { id: "llama-3.1-8b",    name: "Llama 3.1 8B Instruct", family: "Llama",     params: 8.03,  active: 8.03,  layers: 32,  kvPer1K: 64  },
