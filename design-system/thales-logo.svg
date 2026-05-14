@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" role="img" aria-label="Thales (placeholder)">
+  <rect width="320" height="80" fill="transparent"></rect>
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700">
+    <text x="0" y="52" font-size="44" fill="#041295" letter-spacing="-1">Thales</text>
+    <text x="172" y="52" font-size="44" fill="#66D7EB" letter-spacing="-1">●</text>
+  </g>
+  <text x="0" y="72" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#555" letter-spacing="2">QUANTUM DESIGN SYSTEM</text>
+</svg>

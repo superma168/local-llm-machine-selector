@@ -1,0 +1,206 @@
+/* Quantum Design System — tokens
+ * Distilled from the Thales `@qtm/react2` rulebook.
+ * Drop into any Quantum HTML mock and reference via var(--qtm-*).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ── Brand ─────────────────────────────────────────────── */
+  --qtm-primary:           #041295;
+  --qtm-primary-hover:     #020B59;
+  --qtm-secondary:         #66D7EB;
+  --qtm-secondary-hover:   #0096B1;
+
+  /* ── Neutral surfaces ──────────────────────────────────── */
+  --qtm-background:        #F9FAFB;
+  --qtm-surface:           #FFFFFF;
+  --qtm-divider:           #E1E1E1;
+  --qtm-input-border:      #BBBCBD;
+  --qtm-overlay:           rgba(0,0,0,.40);
+
+  /* ── Text ──────────────────────────────────────────────── */
+  --qtm-heading:           #333333;
+  --qtm-body:              #262626;
+  --qtm-muted:             #555555;
+  --qtm-disabled:          #BBBCBD;
+  --qtm-on-primary:        #FFFFFF;
+
+  /* ── Semantic ──────────────────────────────────────────── */
+  --qtm-success:           #126836;
+  --qtm-success-bg:        #E7F2EC;
+  --qtm-error:             #E01E00;
+  --qtm-error-bg:          #FCE8E5;
+  --qtm-warning:           #F28200;
+  --qtm-warning-bg:        #FEF1E1;
+  --qtm-info:              #041295;
+  --qtm-info-bg:           #E6E8F4;
+
+  /* ── Type ──────────────────────────────────────────────── */
+  --qtm-font-sans:         "Inter", system-ui, sans-serif;
+  --qtm-font-mono:         "Roboto Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --qtm-fw-light:    300;
+  --qtm-fw-regular:  400;
+  --qtm-fw-medium:   500;
+  --qtm-fw-semibold: 600;
+  --qtm-fw-bold:     700;
+
+  --qtm-fs-h1:       48px;
+  --qtm-fs-h2:       36px;
+  --qtm-fs-h3:       28px;
+  --qtm-fs-h4:       24px;
+  --qtm-fs-h6:       18px;
+  --qtm-fs-body-lg:  18px;
+  --qtm-fs-body:     16px;
+  --qtm-fs-body-sm:  14px;
+  --qtm-fs-caption:  12px;
+
+  --qtm-lh-tight:    1.25;
+  --qtm-lh-normal:   1.5;
+  --qtm-lh-relaxed:  1.75;
+
+  /* ── Spacing (4/8/16/24/32/48/64/80) ───────────────────── */
+  --qtm-space-xs:    4px;
+  --qtm-space-sm:    8px;
+  --qtm-space-md:    16px;
+  --qtm-space-lg:    24px;
+  --qtm-space-xl:    32px;
+  --qtm-space-2xl:   48px;
+  --qtm-space-3xl:   64px;
+  --qtm-space-4xl:   80px;
+
+  --qtm-container-max:   1368px;
+  --qtm-section-py:      80px;
+  --qtm-section-px:      24px;
+  --qtm-grid-gap:        24px;
+  --qtm-header-height:   64px;
+
+  /* ── Borders / radii ───────────────────────────────────── */
+  --qtm-border-thin:   1px;
+  --qtm-border-medium: 2px;
+  --qtm-border-thick:  4px;
+
+  --qtm-radius-none:   0px;
+  --qtm-radius-sm:     4px;
+  --qtm-radius-md:     8px;
+  --qtm-radius-lg:     16px;
+  --qtm-radius-xl:     24px;
+  --qtm-radius-full:   9999px;
+
+  /* ── Elevation ─────────────────────────────────────────── */
+  --qtm-shadow-none:   none;
+  --qtm-shadow-sm:     0 1px 2px rgba(0,0,0,.05);
+  --qtm-shadow-md:     0 4px 6px rgba(0,0,0,.10);
+  --qtm-shadow-lg:     0 10px 15px rgba(0,0,0,.10);
+  --qtm-shadow-xl:     0 20px 25px rgba(0,0,0,.15);
+
+  /* ── Icons (px) ────────────────────────────────────────── */
+  --qtm-icon-sm:       16px;
+  --qtm-icon-md:       24px;
+  --qtm-icon-lg:       32px;
+
+  /* ── Motion ────────────────────────────────────────────── */
+  --qtm-dur-fast:      150ms;
+  --qtm-dur-normal:    300ms;
+  --qtm-ease:          cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html, body {
+  margin: 0;
+  font-family: var(--qtm-font-sans);
+  font-size: var(--qtm-fs-body);
+  line-height: var(--qtm-lh-normal);
+  color: var(--qtm-body);
+  background: var(--qtm-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Semantic type — pre-built styles ────────────────────── */
+.qtm-title-1, h1.qtm {
+  font-size: var(--qtm-fs-h1);
+  line-height: var(--qtm-lh-tight);
+  font-weight: var(--qtm-fw-bold);
+  color: var(--qtm-heading);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.qtm-title-2, h2.qtm {
+  font-size: var(--qtm-fs-h2);
+  line-height: var(--qtm-lh-tight);
+  font-weight: var(--qtm-fw-bold);
+  color: var(--qtm-heading);
+  letter-spacing: -0.005em;
+  margin: 0;
+}
+.qtm-title-3, h3.qtm {
+  font-size: var(--qtm-fs-h3);
+  line-height: var(--qtm-lh-tight);
+  font-weight: var(--qtm-fw-semibold);
+  color: var(--qtm-heading);
+  margin: 0;
+}
+.qtm-title-4, h4.qtm {
+  font-size: var(--qtm-fs-h4);
+  line-height: var(--qtm-lh-tight);
+  font-weight: var(--qtm-fw-semibold);
+  color: var(--qtm-heading);
+  margin: 0;
+}
+.qtm-subtitle-1 {
+  font-size: var(--qtm-fs-h6);
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-medium);
+  color: var(--qtm-heading);
+}
+.qtm-subtitle-2 {
+  font-size: var(--qtm-fs-body);
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-medium);
+  color: var(--qtm-heading);
+}
+.qtm-body-1, p.qtm {
+  font-size: var(--qtm-fs-body);
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-regular);
+  color: var(--qtm-body);
+}
+.qtm-body-2 {
+  font-size: var(--qtm-fs-body-sm);
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-regular);
+  color: var(--qtm-body);
+}
+.qtm-caption-1 {
+  font-size: var(--qtm-fs-caption);
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-regular);
+  color: var(--qtm-muted);
+}
+.qtm-caption-2 {
+  font-size: 11px;
+  line-height: var(--qtm-lh-normal);
+  font-weight: var(--qtm-fw-medium);
+  color: var(--qtm-muted);
+}
+.qtm-overline {
+  font-size: var(--qtm-fs-caption);
+  letter-spacing: 0.08em;
+  font-weight: var(--qtm-fw-semibold);
+  text-transform: uppercase;
+  color: var(--qtm-muted);
+}
+.qtm-code-1 {
+  font-family: var(--qtm-font-mono);
+  font-size: var(--qtm-fs-body-sm);
+  color: var(--qtm-body);
+  background: var(--qtm-background);
+  padding: 2px 6px;
+  border-radius: var(--qtm-radius-sm);
+}
+.qtm-code-2 {
+  font-family: var(--qtm-font-mono);
+  font-size: var(--qtm-fs-caption);
+  color: var(--qtm-muted);
+}
