@@ -59,8 +59,13 @@ const MODELS = [
   { id: "command-r-35b",   name: "Command R 35B",         family: "Command",   params: 35,    active: 35,    layers: 40,  kvPer1K: 80  },
   { id: "command-r-plus",  name: "Command R+ 104B",       family: "Command",   params: 104,   active: 104,   layers: 64,  kvPer1K: 128 },
 
-  // ── Qwen 3 ───────────────────────────────────────────────
-  { id: "qwen3-8b",        name: "Qwen3 8B",              family: "Qwen 3",    params: 8.19,  active: 8.19,  layers: 36,  kvPer1K: 72  },
+  // ── Qwen 3.6 ─────────────────────────────────────────────
+  { id: "qwen-3.6-27b",    name: "Qwen 3.6 27B",          family: "Qwen 3.6",  params: 27.0,  active: 27.0,  layers: 48,  kvPer1K: 96  },
+  { id: "qwen-3.6-35b",    name: "Qwen 3.6 35B",          family: "Qwen 3.6",  params: 35.0,  active: 35.0,  layers: 64,  kvPer1K: 128 },
+
+  // ── Qwen 3 Coder ─────────────────────────────────────────
+  { id: "qwen3-coder-30b",  name: "Qwen3 Coder 30B",      family: "Qwen 3",    params: 30.0,  active: 30.0,  layers: 64,  kvPer1K: 128 },
+  { id: "qwen3-coder-480b", name: "Qwen3 Coder 480B",     family: "Qwen 3",    params: 480.0, active: 480.0, layers: 96,  kvPer1K: 192 },
 
   // ── 01.AI Yi ──────────────────────────────────────────────
   { id: "yi-34b",          name: "Yi 1.5 34B Chat",       family: "Yi",        params: 34.4,  active: 34.4,  layers: 60,  kvPer1K: 120 },
