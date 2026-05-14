@@ -20,9 +20,19 @@ A lightweight, browser-based tool that helps you match open-source Large Languag
 - FP16, Q8_0, Q6_K, Q5_K_M, Q4_K_M, Q3_K_M, Q2_K
 - Visual quantization ladder on every result card shows exactly which levels fit
 
-**Model Library (26 models)**
-- Llama 3.1/3.3 (1.2B–405B), Qwen 2.5 (7B–72B), DeepSeek R2 / V3 (32B–671B MoE)
-- Mistral / Mixtral (7B–141B MoE), Gemma 3 (4B–27B), Phi-4, Command R+, Yi
+**Model Library (33 models)**
+- **Llama** — 3.2 1B, 3.2 3B, 3.1 8B, 3.3 70B, 3.1 405B
+- **Qwen 2.5** — 7B, 14B, 32B, Coder 32B, 72B
+- **Qwen 3.6** — 27B, 35B
+- **Qwen 3** — Coder 30B, Coder 480B
+- **DeepSeek** — R1 Distill Llama 70B, R1 Distill Qwen 32B, V3 671B (MoE), R1 671B (MoE)
+- **Mistral / Mixtral** — 7B, Small 3 24B, 8×7B (MoE), 8×22B (MoE)
+- **Gemma 4** — E2B, E4B, 26B A4B (MoE), 31B
+- **Gemma 3** — 4B, 12B, 27B
+- **Gemma 2** — 9B
+- **Phi** — 4 14B, 3.5 Mini 3.8B
+- **Command** — R 35B, R+ 104B
+- **Yi** — 1.5 34B
 
 **Hardware Catalog**
 - NVIDIA: RTX 3090, RTX 4070/4090, RTX 6000, A100 40/80 GB, H100, B200, DGX H100/B200
@@ -43,6 +53,7 @@ A lightweight, browser-based tool that helps you match open-source Large Languag
 
 ## How the Sizing Math Works
 
+**VRAM requirement**
 ```
 weights_GB  = params(B) × bytes_per_param(quantization)
 kv_GB       = kvPer1K(MB) × (context / 1024) × kv_precision_scale / 1024
@@ -50,9 +61,19 @@ overhead_GB = engine_base + (FP16 ? 1.0 : 0) + (ctx ≥ 32K ? 0.5 : 0)
 total_GB    = weights_GB + kv_GB + overhead_GB
 ```
 
+**Speed estimate (tokens / second)**
+```
+effective_params = active_params   (MoE models: only active experts are streamed)
+                 = total_params    (dense models)
+weights_GB       = effective_params × bytes_per_param(quantization)
+speed_t_s        = memory_bandwidth_GB_s ÷ weights_GB
+```
+This is the memory-bandwidth-bound ceiling for single-token autoregressive decode at batch=1. It reflects how fast the GPU can stream weights per generated token. Prefill (prompt processing) is compute-bound and not estimated here.
+
 **Caveats**
 - Parameter, layer, and KV-dim numbers are approximations from public model cards — accurate enough for hardware scoping, not production provisioning.
-- DGX boxes assume pooled NVLink VRAM; real multi-GPU placement varies by engine.
+- Speed estimates assume 100% memory bandwidth utilisation; real throughput is typically 70–90% of this figure depending on engine and context length.
+- DGX bandwidth figures use the 8-GPU NVLink aggregate; actual tensor-parallel throughput varies by engine configuration.
 - MSRPs are rough reference figures.
 
 ---
