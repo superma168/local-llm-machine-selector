@@ -20,8 +20,8 @@ A lightweight, browser-based tool that helps you match open-source Large Languag
 - FP16, Q8_0, Q6_K, Q5_K_M, Q4_K_M, Q3_K_M, Q2_K
 - Visual quantization ladder on every result card shows exactly which levels fit
 
-**Model Library (33 models)**
-- **Llama** — 3.2 1B, 3.2 3B, 3.1 8B, 3.3 70B, 3.1 405B
+**Model Library (35 models)**
+- **Llama** — 4 Scout (MoE), 4 Maverick (MoE), 3.2 1B, 3.2 3B, 3.1 8B, 3.3 70B, 3.1 405B
 - **Qwen 2.5** — 7B, 14B, 32B, Coder 32B, 72B
 - **Qwen 3.6** — 27B, 35B
 - **Qwen 3** — Coder 30B, Coder 480B
