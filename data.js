@@ -115,7 +115,8 @@ const ENGINES = [
 ];
 
 /* Machine vendors / platforms. `unified` means VRAM and System RAM come from
- * a single pool (Apple Silicon, Strix Halo) — sizing accounts for this. */
+ * a single pool (Apple Silicon, Strix Halo) — sizing accounts for this.
+ * `bw` is peak memory bandwidth in GB/s, used for tokens/sec estimation. */
 const VENDORS = [
   {
     id: "nvidia-cuda",
@@ -124,11 +125,11 @@ const VENDORS = [
     icon: "developer_board",
     unified: false,
     presets: [
-      { vram: 12, ram: 32,  label: "RTX 4070 / 3060" },
-      { vram: 16, ram: 64,  label: "RTX 4080 / 4060 Ti 16GB" },
-      { vram: 24, ram: 64,  label: "RTX 3090 / 4090" },
-      { vram: 32, ram: 128, label: "RTX 5090" },
-      { vram: 48, ram: 128, label: "RTX 6000 Ada" },
+      { vram: 12, ram: 32,  label: "RTX 4070 / 3060",        bw: 504  },
+      { vram: 16, ram: 64,  label: "RTX 4080 / 4060 Ti 16GB",bw: 736  },
+      { vram: 24, ram: 64,  label: "RTX 3090 / 4090",        bw: 1008 },
+      { vram: 32, ram: 128, label: "RTX 5090",               bw: 1792 },
+      { vram: 48, ram: 128, label: "RTX 6000 Ada",           bw: 960  },
     ],
   },
   {
@@ -138,11 +139,11 @@ const VENDORS = [
     icon: "memory",
     unified: false,
     presets: [
-      { vram: 80,  ram: 1024, label: "H100 / A100 80GB" },
-      { vram: 141, ram: 1024, label: "H200 141GB" },
-      { vram: 192, ram: 2048, label: "B200 192GB" },
-      { vram: 640, ram: 2048, label: "DGX H100 (8×80GB)" },
-      { vram: 1536,ram: 4096, label: "DGX B200 (8×192GB)" },
+      { vram: 80,  ram: 1024, label: "H100 / A100 80GB",      bw: 3350  },
+      { vram: 141, ram: 1024, label: "H200 141GB",            bw: 4800  },
+      { vram: 192, ram: 2048, label: "B200 192GB",            bw: 8000  },
+      { vram: 640, ram: 2048, label: "DGX H100 (8×80GB)",     bw: 26800 },
+      { vram: 1536,ram: 4096, label: "DGX B200 (8×192GB)",    bw: 64000 },
     ],
   },
   {
@@ -152,10 +153,10 @@ const VENDORS = [
     icon: "memory",
     unified: false,
     presets: [
-      { vram: 16,  ram: 32,  label: "RX 7800 XT" },
-      { vram: 20,  ram: 64,  label: "RX 7900 XT" },
-      { vram: 24,  ram: 64,  label: "RX 7900 XTX" },
-      { vram: 192, ram: 512, label: "Instinct MI300X" },
+      { vram: 16,  ram: 32,  label: "RX 7800 XT",            bw: 624  },
+      { vram: 20,  ram: 64,  label: "RX 7900 XT",            bw: 800  },
+      { vram: 24,  ram: 64,  label: "RX 7900 XTX",           bw: 960  },
+      { vram: 192, ram: 512, label: "Instinct MI300X",        bw: 5300 },
     ],
   },
   {
@@ -165,8 +166,8 @@ const VENDORS = [
     icon: "dynamic_form",
     unified: true,
     presets: [
-      { vram: 96,  ram: 128, label: "Ryzen AI Max+ 395 (128GB)" },
-      { vram: 32,  ram: 64,  label: "Ryzen AI Max 390 (64GB)" },
+      { vram: 96,  ram: 128, label: "Ryzen AI Max+ 395 (128GB)", bw: 256 },
+      { vram: 32,  ram: 64,  label: "Ryzen AI Max 390 (64GB)",   bw: 192 },
     ],
   },
   {
@@ -176,9 +177,9 @@ const VENDORS = [
     icon: "developer_board",
     unified: false,
     presets: [
-      { vram: 8,  ram: 32, label: "Arc A750" },
-      { vram: 12, ram: 32, label: "Arc B580" },
-      { vram: 16, ram: 64, label: "Arc A770 16GB" },
+      { vram: 8,  ram: 32, label: "Arc A750",    bw: 512 },
+      { vram: 12, ram: 32, label: "Arc B580",    bw: 456 },
+      { vram: 16, ram: 64, label: "Arc A770 16GB",bw: 560 },
     ],
   },
   {
@@ -188,50 +189,51 @@ const VENDORS = [
     icon: "laptop_mac",
     unified: true,
     presets: [
-      { vram: 18,  ram: 24,  label: "MacBook Pro M4 (24GB)" },
-      { vram: 36,  ram: 48,  label: "MacBook Pro M4 Pro (48GB)" },
-      { vram: 96,  ram: 128, label: "MacBook Pro M4 Max (128GB)" },
-      { vram: 144, ram: 192, label: "Mac Studio M3 Ultra (192GB)" },
-      { vram: 400, ram: 512, label: "Mac Studio M3 Ultra (512GB)" },
+      { vram: 18,  ram: 24,  label: "MacBook Pro M4 (24GB)",      bw: 120 },
+      { vram: 36,  ram: 48,  label: "MacBook Pro M4 Pro (48GB)",  bw: 273 },
+      { vram: 96,  ram: 128, label: "MacBook Pro M4 Max (128GB)", bw: 546 },
+      { vram: 144, ram: 192, label: "Mac Studio M3 Ultra (192GB)",bw: 800 },
+      { vram: 400, ram: 512, label: "Mac Studio M3 Ultra (512GB)",bw: 800 },
     ],
   },
 ];
 
 /* Specific market machines — used as the result set for Mode 2.
- * vendor maps back into VENDORS for the engine compatibility check. */
+ * vendor maps back into VENDORS for the engine compatibility check.
+ * bw = peak memory bandwidth in GB/s (used for tokens/sec estimation). */
 const MACHINES = [
   // NVIDIA consumer
-  { id: "rtx-5090",     vendor: "nvidia-cuda", name: "NVIDIA RTX 5090",         tier: "Consumer",   vram: 32,  ram: 128, msrp: "$1,999" },
-  { id: "rtx-4090",     vendor: "nvidia-cuda", name: "NVIDIA RTX 4090",         tier: "Consumer",   vram: 24,  ram: 64,  msrp: "$1,599" },
-  { id: "rtx-3090",     vendor: "nvidia-cuda", name: "NVIDIA RTX 3090",         tier: "Consumer",   vram: 24,  ram: 64,  msrp: "$700 used" },
-  { id: "rtx-4080s",    vendor: "nvidia-cuda", name: "NVIDIA RTX 4080 SUPER",   tier: "Consumer",   vram: 16,  ram: 64,  msrp: "$999" },
-  { id: "rtx-4060ti",   vendor: "nvidia-cuda", name: "NVIDIA RTX 4060 Ti 16GB", tier: "Consumer",   vram: 16,  ram: 32,  msrp: "$499" },
-  { id: "rtx-6000-ada", vendor: "nvidia-cuda", name: "NVIDIA RTX 6000 Ada",     tier: "Workstation",vram: 48,  ram: 128, msrp: "$6,800" },
+  { id: "rtx-5090",      vendor: "nvidia-cuda", name: "NVIDIA RTX 5090",          tier: "Consumer",    vram: 32,  ram: 128,  bw: 1792,  msrp: "$1,999" },
+  { id: "rtx-4090",      vendor: "nvidia-cuda", name: "NVIDIA RTX 4090",          tier: "Consumer",    vram: 24,  ram: 64,   bw: 1008,  msrp: "$1,599" },
+  { id: "rtx-3090",      vendor: "nvidia-cuda", name: "NVIDIA RTX 3090",          tier: "Consumer",    vram: 24,  ram: 64,   bw: 936,   msrp: "$700 used" },
+  { id: "rtx-4080s",     vendor: "nvidia-cuda", name: "NVIDIA RTX 4080 SUPER",    tier: "Consumer",    vram: 16,  ram: 64,   bw: 736,   msrp: "$999" },
+  { id: "rtx-4060ti",    vendor: "nvidia-cuda", name: "NVIDIA RTX 4060 Ti 16GB",  tier: "Consumer",    vram: 16,  ram: 32,   bw: 288,   msrp: "$499" },
+  { id: "rtx-6000-ada",  vendor: "nvidia-cuda", name: "NVIDIA RTX 6000 Ada",      tier: "Workstation", vram: 48,  ram: 128,  bw: 960,   msrp: "$6,800" },
 
   // NVIDIA datacenter
-  { id: "a100-80",      vendor: "nvidia-dgx",  name: "NVIDIA A100 80GB",        tier: "Datacenter", vram: 80,  ram: 1024,msrp: "$15k+" },
-  { id: "h100-80",      vendor: "nvidia-dgx",  name: "NVIDIA H100 80GB",        tier: "Datacenter", vram: 80,  ram: 1024,msrp: "$30k+" },
-  { id: "h200-141",     vendor: "nvidia-dgx",  name: "NVIDIA H200 141GB",       tier: "Datacenter", vram: 141, ram: 2048,msrp: "$32k+" },
-  { id: "b200-192",     vendor: "nvidia-dgx",  name: "NVIDIA B200 192GB",       tier: "Datacenter", vram: 192, ram: 2048,msrp: "$40k+" },
-  { id: "dgx-h100",     vendor: "nvidia-dgx",  name: "NVIDIA DGX H100",         tier: "Datacenter", vram: 640, ram: 2048,msrp: "$300k+", note: "8×H100 NVLink" },
-  { id: "dgx-b200",     vendor: "nvidia-dgx",  name: "NVIDIA DGX B200",         tier: "Datacenter", vram: 1536,ram: 4096,msrp: "$500k+", note: "8×B200 NVLink" },
+  { id: "a100-80",       vendor: "nvidia-dgx",  name: "NVIDIA A100 80GB",         tier: "Datacenter",  vram: 80,  ram: 1024, bw: 2000,  msrp: "$15k+" },
+  { id: "h100-80",       vendor: "nvidia-dgx",  name: "NVIDIA H100 80GB",         tier: "Datacenter",  vram: 80,  ram: 1024, bw: 3350,  msrp: "$30k+" },
+  { id: "h200-141",      vendor: "nvidia-dgx",  name: "NVIDIA H200 141GB",        tier: "Datacenter",  vram: 141, ram: 2048, bw: 4800,  msrp: "$32k+" },
+  { id: "b200-192",      vendor: "nvidia-dgx",  name: "NVIDIA B200 192GB",        tier: "Datacenter",  vram: 192, ram: 2048, bw: 8000,  msrp: "$40k+" },
+  { id: "dgx-h100",      vendor: "nvidia-dgx",  name: "NVIDIA DGX H100",          tier: "Datacenter",  vram: 640, ram: 2048, bw: 26800, msrp: "$300k+", note: "8×H100 NVLink" },
+  { id: "dgx-b200",      vendor: "nvidia-dgx",  name: "NVIDIA DGX B200",          tier: "Datacenter",  vram: 1536,ram: 4096, bw: 64000, msrp: "$500k+", note: "8×B200 NVLink" },
 
   // AMD
-  { id: "rx-7900xtx",   vendor: "amd-rocm",    name: "AMD Radeon RX 7900 XTX",  tier: "Consumer",   vram: 24,  ram: 64,  msrp: "$999" },
-  { id: "rx-7900xt",    vendor: "amd-rocm",    name: "AMD Radeon RX 7900 XT",   tier: "Consumer",   vram: 20,  ram: 64,  msrp: "$749" },
-  { id: "mi300x",       vendor: "amd-rocm",    name: "AMD Instinct MI300X",     tier: "Datacenter", vram: 192, ram: 512, msrp: "$15k+" },
-  { id: "strix-halo-128",vendor: "amd-strix",  name: "Ryzen AI Max+ 395 (128GB)",tier: "Workstation",vram: 96, ram: 128, msrp: "$2,300", unified: true },
-  { id: "strix-halo-64",vendor: "amd-strix",   name: "Ryzen AI Max 390 (64GB)", tier: "Consumer",   vram: 48,  ram: 64,  msrp: "$1,500", unified: true },
+  { id: "rx-7900xtx",    vendor: "amd-rocm",    name: "AMD Radeon RX 7900 XTX",   tier: "Consumer",    vram: 24,  ram: 64,   bw: 960,   msrp: "$999" },
+  { id: "rx-7900xt",     vendor: "amd-rocm",    name: "AMD Radeon RX 7900 XT",    tier: "Consumer",    vram: 20,  ram: 64,   bw: 800,   msrp: "$749" },
+  { id: "mi300x",        vendor: "amd-rocm",    name: "AMD Instinct MI300X",      tier: "Datacenter",  vram: 192, ram: 512,  bw: 5300,  msrp: "$15k+" },
+  { id: "strix-halo-128",vendor: "amd-strix",   name: "Ryzen AI Max+ 395 (128GB)",tier: "Workstation", vram: 96,  ram: 128,  bw: 256,   msrp: "$2,300", unified: true },
+  { id: "strix-halo-64", vendor: "amd-strix",   name: "Ryzen AI Max 390 (64GB)",  tier: "Consumer",    vram: 48,  ram: 64,   bw: 192,   msrp: "$1,500", unified: true },
 
   // Intel
-  { id: "arc-a770",     vendor: "intel-arc",   name: "Intel Arc A770 16GB",     tier: "Consumer",   vram: 16,  ram: 64,  msrp: "$329" },
-  { id: "arc-b580",     vendor: "intel-arc",   name: "Intel Arc B580",          tier: "Consumer",   vram: 12,  ram: 32,  msrp: "$249" },
+  { id: "arc-a770",      vendor: "intel-arc",   name: "Intel Arc A770 16GB",      tier: "Consumer",    vram: 16,  ram: 64,   bw: 560,   msrp: "$329" },
+  { id: "arc-b580",      vendor: "intel-arc",   name: "Intel Arc B580",           tier: "Consumer",    vram: 12,  ram: 32,   bw: 456,   msrp: "$249" },
 
   // Apple
-  { id: "mac-mini-m4",  vendor: "apple",       name: "Mac mini M4 Pro (64GB)",  tier: "Consumer",   vram: 48,  ram: 64,  msrp: "$2,199", unified: true },
-  { id: "mbp-m4-max-128",vendor: "apple",      name: "MacBook Pro M4 Max (128GB)",tier:"Workstation",vram:96,  ram: 128, msrp: "$5,499", unified: true },
-  { id: "studio-m3u-192",vendor: "apple",      name: "Mac Studio M3 Ultra (192GB)",tier:"Workstation",vram:144,ram: 192, msrp: "$6,999", unified: true },
-  { id: "studio-m3u-512",vendor: "apple",      name: "Mac Studio M3 Ultra (512GB)",tier:"Workstation",vram:400,ram: 512, msrp: "$9,499", unified: true },
+  { id: "mac-mini-m4",   vendor: "apple",       name: "Mac mini M4 Pro (64GB)",   tier: "Consumer",    vram: 48,  ram: 64,   bw: 273,   msrp: "$2,199", unified: true },
+  { id: "mbp-m4-max-128",vendor: "apple",       name: "MacBook Pro M4 Max (128GB)",tier:"Workstation", vram: 96,  ram: 128,  bw: 546,   msrp: "$5,499", unified: true },
+  { id: "studio-m3u-192",vendor: "apple",       name: "Mac Studio M3 Ultra (192GB)",tier:"Workstation",vram: 144, ram: 192,  bw: 800,   msrp: "$6,999", unified: true },
+  { id: "studio-m3u-512",vendor: "apple",       name: "Mac Studio M3 Ultra (512GB)",tier:"Workstation",vram: 400, ram: 512,  bw: 800,   msrp: "$9,499", unified: true },
 ];
 
 Object.assign(window, {

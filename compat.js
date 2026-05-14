@@ -93,6 +93,23 @@ function quantLadder(model, ctx, kvPrecId, engineId, machineLike) {
   }));
 }
 
+/* Tokens-per-second estimate (bandwidth-bound, batch=1 decode).
+ *
+ * Formula: T/s ≈ bandwidth_GB_s / weights_GB
+ *
+ * For MoE models only the active expert weights are streamed per token,
+ * so we use `active` params rather than total `params`.
+ * This is a rough ceiling — real throughput varies by engine, context
+ * length, and parallelism strategy. */
+function estimateTPS(model, quantId, bw) {
+  if (!bw || bw <= 0) return null;
+  const quant = findQuant(quantId);
+  const effectiveParams = model.moe ? model.active : model.params;
+  const weights_GB = effectiveParams * quant.bpp;
+  if (weights_GB <= 0) return null;
+  return Math.round(bw / weights_GB);
+}
+
 /* Format helpers */
 function fmtGB(n) {
   if (n >= 100) return Math.round(n) + " GB";
@@ -109,9 +126,14 @@ function fmtContext(t) {
   if (t >= 1024) return (t / 1024) + "K";
   return t.toString();
 }
+function fmtTPS(tps) {
+  if (tps == null) return null;
+  if (tps >= 1000) return "~" + (tps / 1000).toFixed(1) + "k t/s";
+  return "~" + Math.round(tps) + " t/s";
+}
 
 Object.assign(window, {
   findQuant, findEngine, findVendor, findKvPrec, findModel, findMachine,
-  sizeModel, checkFit, bestQuantFor, quantLadder,
-  fmtGB, fmtParams, fmtContext,
+  sizeModel, checkFit, bestQuantFor, quantLadder, estimateTPS,
+  fmtGB, fmtParams, fmtContext, fmtTPS,
 });

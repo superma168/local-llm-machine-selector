@@ -258,6 +258,10 @@ function ModelResultCard({ model, machineLike, cfg }) {
   if (!best.fits) status = "wont-fit";
   if (!r.engineOk) status = "engine-incompatible";
 
+  const tps = best.fits && machineLike.bw
+    ? window.estimateTPS(model, best.quant.id, machineLike.bw)
+    : null;
+
   const subParts = [
     window.fmtParams(model.params) + " params",
     model.layers + "L",
@@ -280,6 +284,7 @@ function ModelResultCard({ model, machineLike, cfg }) {
         <dd>{best.fits ? best.quant.id : "—"}</dd>
         <dt>Required</dt>
         <dd>{window.fmtGB(r.total)}</dd>
+        {tps && <><dt>Speed est.</dt><dd>{window.fmtTPS(tps)}</dd></>}
       </dl>
 
       <UsageBar used={r.total} total={machineLike.vram} />
@@ -317,7 +322,8 @@ function MachineMode() {
 
   const machineLike = useMemo(() => {
     const v = window.findVendor(cfg.vendorId);
-    return { vendor: cfg.vendorId, vram: cfg.vram, ram: cfg.ram, unified: v.unified };
+    const preset = v.presets.find(p => p.vram === cfg.vram && p.ram === cfg.ram);
+    return { vendor: cfg.vendorId, vram: cfg.vram, ram: cfg.ram, unified: v.unified, bw: preset ? preset.bw : null };
   }, [cfg.vendorId, cfg.vram, cfg.ram]);
 
   const ranked = useMemo(() => {
@@ -510,6 +516,7 @@ function ModelConfig({ cfg, setCfg }) {
 
 function MachineResultCard({ machine, model, cfg }) {
   const r = window.checkFit(model, cfg.quantId, cfg.ctx, cfg.kvPrecId, cfg.engineId, machine);
+  const tps = r.fits ? window.estimateTPS(model, cfg.quantId, machine.bw) : null;
 
   const sub = `${machine.tier} • ${machine.vram}GB${machine.unified ? " unified" : " VRAM"}`;
   const vendor = window.findVendor(machine.vendor);
@@ -530,6 +537,7 @@ function MachineResultCard({ machine, model, cfg }) {
         <dd>{window.fmtGB(r.total)}</dd>
         <dt>Available</dt>
         <dd>{machine.vram} GB</dd>
+        {tps && <><dt>Speed est.</dt><dd>{window.fmtTPS(tps)}</dd></>}
         <dt>Platform</dt>
         <dd style={{ fontFamily: "var(--qtm-font-sans)", fontSize: 11 }}>{vendor.name}</dd>
         <dt>Indicative</dt>
