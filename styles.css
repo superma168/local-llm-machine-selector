@@ -574,3 +574,85 @@ body {
   padding: 1px 6px; border-radius: var(--qtm-radius-sm);
   color: var(--qtm-heading);
 }
+
+/* ── Responsive: Tablet (≤ 900px) ──────────────────────── */
+@media (max-width: 900px) {
+  .topbar { padding: 0 20px; gap: 16px; }
+
+  .hero { padding: 28px 20px 16px; }
+  .hero h1 { font-size: 28px; }
+
+  .mode-switch { padding: 0 20px; gap: 12px; }
+
+  .workbench { padding: 0 20px; }
+
+  .foot-note { padding: 0 20px 40px; }
+}
+
+/* ── Responsive: Phone (≤ 600px) ───────────────────────── */
+@media (max-width: 600px) {
+  /* Topbar */
+  .topbar {
+    padding: 0 16px; gap: 8px;
+    height: auto; min-height: var(--qtm-header-height);
+    flex-wrap: wrap;
+  }
+  .topbar__meta { display: none; }
+  .topbar__title small { display: none; }
+
+  /* Hero */
+  .hero { padding: 20px 16px 12px; }
+  .hero h1 { font-size: 22px; }
+  .hero p { font-size: 13px; }
+
+  /* Mode switch: stack vertically */
+  .mode-switch {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    margin-top: 16px;
+  }
+  .mode-card { padding: 16px 18px; gap: 12px; }
+  .mode-card__title { font-size: 15px; }
+  .mode-card__desc { font-size: 12px; }
+
+  /* Workbench */
+  .workbench {
+    padding: 0 16px;
+    margin-top: 16px;
+    margin-bottom: 40px;
+    gap: 16px;
+  }
+
+  /* Config panel: remove sticky so it scrolls away on phone */
+  .config-panel { position: relative; top: 0; padding: 16px; }
+
+  /* Results */
+  .results__head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .results__title { font-size: 17px; }
+
+  /* Summary strip */
+  .summary-strip { padding: 12px 14px; font-size: 12px; gap: 10px; flex-wrap: wrap; }
+  .summary-strip .material-symbols-outlined { display: none; }
+
+  /* Legend: stack vertically */
+  .results__legend { flex-direction: column; gap: 6px; }
+
+  /* Segmented controls: tighter on small screens */
+  .seg button { padding: 6px 6px; font-size: 11px; }
+
+  /* Result cards: single column */
+  .grid { grid-template-columns: 1fr; }
+
+  /* Vendor grid stays 2-col but tighter */
+  .vendor-pill { padding: 8px 10px; font-size: 11px; }
+
+  /* Preset chips: smaller */
+  .preset-chip { padding: 4px 8px; font-size: 10px; }
+
+  /* Model pick stats */
+  .model-pick__stats .v { font-size: 12px; }
+
+  /* Footer */
+  .foot-note { padding: 0 16px 32px; font-size: 11px; }
+  .foot-note code { font-size: 10px; }
+}
