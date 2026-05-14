@@ -104,6 +104,31 @@ function StatusBadge({ status }) {
   );
 }
 
+/* ── Theme toggle ─────────────────────────────────────────── */
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "system");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else if (theme === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  }, [theme]);
+
+  return (
+    <div className="theme-toggle">
+      <button className={"theme-btn" + (theme === "light"  ? " active" : "")} onClick={() => setTheme("light")}  title="Light mode"><Icon name="light_mode" /></button>
+      <button className={"theme-btn" + (theme === "system" ? " active" : "")} onClick={() => setTheme("system")} title="System default"><Icon name="brightness_auto" /></button>
+      <button className={"theme-btn" + (theme === "dark"   ? " active" : "")} onClick={() => setTheme("dark")}   title="Dark mode"><Icon name="dark_mode" /></button>
+    </div>
+  );
+}
+
 /* ── Mode 1: machine → models ─────────────────────────────── */
 
 function MachineConfig({ cfg, setCfg }) {
@@ -645,6 +670,7 @@ function App() {
           <small>Quantum • Inference sizing</small>
         </div>
         <div className="topbar__spacer"></div>
+        <ThemeToggle />
         <div className="topbar__meta">
           <span><Icon name="memory" /> {window.MODELS.length} models</span>
           <span><Icon name="developer_board" /> {window.MACHINES.length} machines</span>

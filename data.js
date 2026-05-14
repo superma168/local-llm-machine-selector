@@ -42,6 +42,7 @@ const MODELS = [
   { id: "mixtral-8x22b",   name: "Mixtral 8x22B (MoE)",   family: "Mistral",   params: 141,   active: 39,    layers: 56,  kvPer1K: 112, moe: true },
 
   // ── Google Gemma ──────────────────────────────────────────
+  { id: "gemma-4-27b",     name: "Gemma 4 27B Instruct",  family: "Gemma",     params: 27.4,  active: 27.4,  layers: 62,  kvPer1K: 124 },
   { id: "gemma-3-4b",      name: "Gemma 3 4B Instruct",   family: "Gemma",     params: 4.30,  active: 4.30,  layers: 34,  kvPer1K: 68  },
   { id: "gemma-3-12b",     name: "Gemma 3 12B Instruct",  family: "Gemma",     params: 12.2,  active: 12.2,  layers: 48,  kvPer1K: 96  },
   { id: "gemma-3-27b",     name: "Gemma 3 27B Instruct",  family: "Gemma",     params: 27.4,  active: 27.4,  layers: 62,  kvPer1K: 124 },
@@ -54,6 +55,9 @@ const MODELS = [
   // ── Cohere Command ────────────────────────────────────────
   { id: "command-r-35b",   name: "Command R 35B",         family: "Command",   params: 35,    active: 35,    layers: 40,  kvPer1K: 80  },
   { id: "command-r-plus",  name: "Command R+ 104B",       family: "Command",   params: 104,   active: 104,   layers: 64,  kvPer1K: 128 },
+
+  // ── Qwen 3 ───────────────────────────────────────────────
+  { id: "qwen3-8b",        name: "Qwen3 8B",              family: "Qwen 3",    params: 8.19,  active: 8.19,  layers: 36,  kvPer1K: 72  },
 
   // ── 01.AI Yi ──────────────────────────────────────────────
   { id: "yi-34b",          name: "Yi 1.5 34B Chat",       family: "Yi",        params: 34.4,  active: 34.4,  layers: 60,  kvPer1K: 120 },

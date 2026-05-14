@@ -575,6 +575,45 @@ body {
   color: var(--qtm-heading);
 }
 
+/* ── Theme toggle ───────────────────────────────────────── */
+.theme-toggle {
+  display: flex; align-items: center;
+  background: var(--qtm-background);
+  border-radius: var(--qtm-radius-md);
+  padding: 3px; gap: 2px;
+  flex-shrink: 0;
+}
+.theme-btn {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: none;
+  border-radius: var(--qtm-radius-sm);
+  cursor: pointer; color: var(--qtm-muted);
+  transition: all var(--qtm-dur-fast) var(--qtm-ease);
+}
+.theme-btn .material-symbols-outlined { font-size: 16px; }
+.theme-btn:hover { color: var(--qtm-heading); background: var(--qtm-surface); }
+.theme-btn.active { background: var(--qtm-surface); color: var(--qtm-primary); box-shadow: var(--qtm-shadow-sm); }
+
+/* ── Dark mode: override hardcoded rgba values ──────────── */
+:root[data-theme="dark"] .mode-card:hover     { border-color: rgba(123,142,255,.4); }
+:root[data-theme="dark"] .vendor-pill.active  { background: rgba(123,142,255,.10); }
+:root[data-theme="dark"] .preset-chip.active  { background: rgba(123,142,255,.15); }
+:root[data-theme="dark"] .qselect select:focus{ box-shadow: 0 0 0 2px rgba(123,142,255,.30); }
+:root[data-theme="dark"] .rcard.fits-comfortable { border-color: rgba(74,222,128,.30); }
+:root[data-theme="dark"] .rcard.fits-tight    { border-color: rgba(251,191,36,.30); }
+:root[data-theme="dark"] .topbar__brand img   { filter: brightness(0) invert(1); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .mode-card:hover     { border-color: rgba(123,142,255,.4); }
+  :root:not([data-theme="light"]) .vendor-pill.active  { background: rgba(123,142,255,.10); }
+  :root:not([data-theme="light"]) .preset-chip.active  { background: rgba(123,142,255,.15); }
+  :root:not([data-theme="light"]) .qselect select:focus{ box-shadow: 0 0 0 2px rgba(123,142,255,.30); }
+  :root:not([data-theme="light"]) .rcard.fits-comfortable { border-color: rgba(74,222,128,.30); }
+  :root:not([data-theme="light"]) .rcard.fits-tight    { border-color: rgba(251,191,36,.30); }
+  :root:not([data-theme="light"]) .topbar__brand img   { filter: brightness(0) invert(1); }
+}
+
 /* ── Responsive: Tablet (≤ 900px) ──────────────────────── */
 @media (max-width: 900px) {
   .topbar { padding: 0 20px; gap: 16px; }

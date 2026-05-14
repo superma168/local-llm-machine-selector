@@ -106,6 +106,75 @@
   --qtm-ease:          cubic-bezier(.4,0,.2,1);
 }
 
+/* ── Dark theme ───────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  --qtm-primary:        #7B8EFF;
+  --qtm-primary-hover:  #A0AEFF;
+  --qtm-secondary:      #66D7EB;
+  --qtm-secondary-hover:#88E4F4;
+
+  --qtm-background:     #0F1117;
+  --qtm-surface:        #1A1D27;
+  --qtm-divider:        #2D3249;
+  --qtm-input-border:   #404670;
+  --qtm-overlay:        rgba(0,0,0,.65);
+
+  --qtm-heading:        #E8E9F5;
+  --qtm-body:           #C4C6D8;
+  --qtm-muted:          #8A8FAA;
+  --qtm-disabled:       #404670;
+  --qtm-on-primary:     #0F1117;
+
+  --qtm-success:        #4ADE80;
+  --qtm-success-bg:     rgba(74,222,128,.10);
+  --qtm-error:          #F87171;
+  --qtm-error-bg:       rgba(248,113,113,.10);
+  --qtm-warning:        #FBBF24;
+  --qtm-warning-bg:     rgba(251,191,36,.10);
+  --qtm-info:           #7B8EFF;
+  --qtm-info-bg:        rgba(123,142,255,.10);
+
+  --qtm-shadow-sm:  0 1px 2px rgba(0,0,0,.30);
+  --qtm-shadow-md:  0 4px 6px rgba(0,0,0,.40);
+  --qtm-shadow-lg:  0 10px 15px rgba(0,0,0,.40);
+  --qtm-shadow-xl:  0 20px 25px rgba(0,0,0,.50);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qtm-primary:        #7B8EFF;
+    --qtm-primary-hover:  #A0AEFF;
+    --qtm-secondary:      #66D7EB;
+    --qtm-secondary-hover:#88E4F4;
+
+    --qtm-background:     #0F1117;
+    --qtm-surface:        #1A1D27;
+    --qtm-divider:        #2D3249;
+    --qtm-input-border:   #404670;
+    --qtm-overlay:        rgba(0,0,0,.65);
+
+    --qtm-heading:        #E8E9F5;
+    --qtm-body:           #C4C6D8;
+    --qtm-muted:          #8A8FAA;
+    --qtm-disabled:       #404670;
+    --qtm-on-primary:     #0F1117;
+
+    --qtm-success:        #4ADE80;
+    --qtm-success-bg:     rgba(74,222,128,.10);
+    --qtm-error:          #F87171;
+    --qtm-error-bg:       rgba(248,113,113,.10);
+    --qtm-warning:        #FBBF24;
+    --qtm-warning-bg:     rgba(251,191,36,.10);
+    --qtm-info:           #7B8EFF;
+    --qtm-info-bg:        rgba(123,142,255,.10);
+
+    --qtm-shadow-sm:  0 1px 2px rgba(0,0,0,.30);
+    --qtm-shadow-md:  0 4px 6px rgba(0,0,0,.40);
+    --qtm-shadow-lg:  0 10px 15px rgba(0,0,0,.40);
+    --qtm-shadow-xl:  0 20px 25px rgba(0,0,0,.50);
+  }
+}
+
 /* ── Base ─────────────────────────────────────────────────── */
 html, body {
   margin: 0;
